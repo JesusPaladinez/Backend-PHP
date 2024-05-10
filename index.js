@@ -35,5 +35,13 @@ function eliminarProducto(id) {
       alert("Ok");
     });
 }
-cargarDatos();
 
+function traerDatos(id) {
+  fetch('controllers/traerProductoController.php?id=' + id)
+  .then(response => response.json)
+  .then(data => {
+    alert(data['codigo']);
+  })
+}
+
+cargarDatos();

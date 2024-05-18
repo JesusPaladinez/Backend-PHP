@@ -11,21 +11,18 @@
         $this->descripcion=$descripcion;
        } 
        function traerProductos(){
-        $conn = new Conexion('localhost', 'mariaperalta', '8kyW-NqhU)429CW0', 'mariaperalta');
+        $conn = new Conexion('localhost', 'root', 'Paladinez1014181584*', 'dbProductosPHP');
         try {
             $conexion = $conn->Conectar();
             $stmt=$conexion->query('SELECT * from productos');
             $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
             return $rows;
-                // foreach ($conexion->query('SELECT * from productos') as $fila) {
-                //     print_r(json_encode($fila));
-                // }  
         } catch (PDOException $e) {
             echo "Error al conectarse ====>" . $e;
         }
        }
        function traerProducto($id){
-        $conn = new Conexion('localhost', 'mariaperalta', '8kyW-NqhU)429CW0', 'mariaperalta');
+        $conn = new Conexion('localhost', 'root', 'Paladinez1014181584*', 'dbProductosPHP');
         try {
             $conexion = $conn->Conectar();
             $stmt=$conexion->query('SELECT * from productos WHERE id={$id}');
@@ -39,7 +36,7 @@
         }
        }
        function eliminarProducto($id){
-        $conn = new Conexion('localhost', 'mariaperalta', '8kyW-NqhU)429CW0', 'mariaperalta');
+        $conn = new Conexion('localhost', 'root', 'Paladinez1014181584*', 'dbProductosPHP');
         try {
             $conexion = $conn->Conectar();
             $stmt = $conexion->prepare("DELETE FROM productos WHERE id = $id");

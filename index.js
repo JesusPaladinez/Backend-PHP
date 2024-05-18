@@ -19,7 +19,7 @@ function cargarDatos() {
                     data-bs-whatever="@getbootstrap">
                     <ion-icon name="create-outline"></ion-icon>
                 </button>
-                <button class="btn btn-outline-danger" onClick="eliminarProducto(${row.id})">
+                <button class="btn btn-outline-danger" onClick="eliminarProducto(${row.id},${row.id},${row.id},)">
                 <ion-icon name="trash-outline"></ion-icon>
                 </button>
             </td>
@@ -35,5 +35,25 @@ function eliminarProducto(id) {
       alert("Ok");
     });
 }
+
+function traerDatos(id) {
+  fetch('controllers/traerProductoController.php?id=' + id)
+  .then(response => response.json)
+  .then(data => {
+    var inputNombre = document.getElementById('nombre');
+    var inputCodigo = document.getElementById('codigo');
+    var inputIdProducto = document.getElementById('idProducto');
+    inputNombre.value = data['nombre']
+    inputCodigo.value = data['codigo']
+    inputIdProducto.value = data['idProducto']
+  })
+}
+
 cargarDatos();
+
+var boton = document.getElementById('guardar');
+
+boton.onclick = function() {
+  alert('Haz dado clic en el botón.')
+}
 

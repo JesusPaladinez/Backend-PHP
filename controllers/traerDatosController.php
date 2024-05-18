@@ -1,6 +1,6 @@
 <?php
     include('../models/ProductoDAO.php');
     $productoDAO = new ProductosDAO();
-    $productos = $productoDAO->traerProducto();
-    print_r(json_encode($productos));
+    $datos = $productoDAO->traerDatos($_GET['id']);
+    print_r(json_encode($datos));
 ?>

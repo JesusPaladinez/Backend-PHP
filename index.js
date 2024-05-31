@@ -44,4 +44,14 @@ function traerDatos(id) {
   })
 }
 
+function mostrarAlerta(mensaje) {
+  var alerta = document.getElementById("alerMessange");
+  alerta.innerHTML = mensaje;
+  alerta.hidden = false;
+
+  setTimeout(function () {
+    alerta.hidden = true;
+  }, 1000);
+}
+
 cargarDatos();

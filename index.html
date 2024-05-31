@@ -1,100 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
 
-    <title>Document</title>
-  </head>
-  <body class="container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>Accion</th>
-        </tr>
-      </thead>
-      <tbody id="tablaDatos"></tbody>
-    </table>
-    <script src="index.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</head>
 
-    <button
-      type="button"
-      class="btn btn-outline-info"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      data-bs-whatever="@getbootstrap"
-    >
+<body>
+  <div class="container d-flex flex-column gap-4 justify-content-center align-items-center">
+    <div class="container col-6 p-4">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaDatos"></tbody>
+      </table>
+    </div>
+
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Agregar
     </button>
 
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1
-              class="modal-title fs-5 "
-              id="exampleModalLabel"
-            >
-              Agregar Producto
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Agregar producto
             </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="name" class="form-label">Nombre</label>
-                <input type="text" id="idClase" />
-                <input type="text" class="form-control" id="nombre"/>
-              </div>
-              <div class="mb-3">
-                <label for="descripcion" class="form-label">Descripcion</label>
-                <textarea type="text" class="form-control"></textarea>
-              </div>
-              <button type="submit" class="btn btn-outline-primary">
-                Submit
-              </button>
-            </form>
+            <!-- ///////Form -->
+            <div class="container mt-3">
+              <form action="/action_page.php">
+                <div class="mb-3 mt-3 d-flex flex-column gap-2">
+                  <input type="number" class="form-control" id="id" placeholder="Ingresa tu codigo" name="id" hidden />
+                </div>
+                <div class="mb-3 mt-3 d-flex flex-column gap-2">
+                  <input type="text" class="form-control" id="nombre"
+                    placeholder="Nombre" name="nombre" />
+                </div>
+                <div class="mb-3 mt-3 d-flex flex-column gap-2">
+                  <input type="text" class="form-control desc" id="descripcion"
+                    placeholder="Descripcion" />
+                </div>
+                <div class="modal-footer">
+                  <button id="Guardar" type="button" data-bs-dismiss="modal" class="btn btn-dark" onclick="agregarProducto()">
+                    Aceptar
+                  </button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
+          <!-- ////Form -->
         </div>
       </div>
     </div>
-  </body>
+    <div class=" text-center col-5 alert alert-success" id="alerMessange" hidden role="alert">
+    </div>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="index.js"></script>
+</body>
+
 </html>

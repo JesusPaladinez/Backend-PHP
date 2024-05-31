@@ -1,10 +1,12 @@
 <?php
     include("../models/ProductoDAO.php");
-    $productoDAO = new ProductosDAO();
+    $productoDAO = new ProductoDAO();
     if($_REQUEST['id']==''){
-        $productoDAO->agregarProducto($_GET['id'], $_GET['nombre'], $_GET['descripcion']);
+        $productoDAO->agregarProducto($_REQUEST['id'], $_REQUEST['nombre'], $_REQUEST['descripcion']);
+        echo ("Se agrego con exito");
     }else{
         $productoDAO->actualizarProducto($_REQUEST['id'],$_REQUEST['nombre'],$_REQUEST['descripcion']);
+        echo ("Se actualizo con exito");
     }
 
 ?>

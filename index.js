@@ -67,54 +67,13 @@ function eliminarProducto(id) {
     });
 }
 
-function agregarProducto() {
-  const id = document.getElementById("id").value;
-  const nombre = document.getElementById("nombre").value;
-  const descripcion = document.getElementById("descripcion").value;
-
-  fetch(
-    `./controllers/agregarProductoController.php?id=${id}&nombre=${nombre}&descripcion=${descripcion}`
-  )
-    .then((response) => {
-      return response.text();
-    })
-    .then((data) => {
-      cargarDatos();
-      mostrarAlerta("Se agrego con exito");
-      console.log(data);
-      document.getElementById("id").value = "";
-      document.getElementById("nombre").value = "";
-      document.getElementById("descripcion").value = "";
-    });
+function traerDatos(id) {
+  fetch('controllers/traerProductoController.php?id=' + id)
+  .then(response => response.json)
+  .then(data => {
+    alert(data['codigo']);
+  })
 }
-
-function traerProducto(id) {
-  fetch(`./controllers/traerProductoController.php?id=${id}`)
-    .then((response) => response.json())
-    .then((data) => {
-      var inputCodigo = document.getElementById("id");
-      var inputNombre = document.getElementById("nombre");
-      var inputDescripcion = document.getElementById("descripcion");
-      inputCodigo.value = data["id"];
-      inputNombre.value = data["nombre"];
-      inputDescripcion.value = data["descripcion"];
-    });
-
-  var boton = document.getElementById("Guardar");
-  boton.onclick = function () {
-    var inputCodigo = document.getElementById("id");
-    var inputNombre = document.getElementById("nombre");
-    var inputDescripcion = document.getElementById("descripcion");
-    var valId = inputCodigo.value;
-    var valNombre = inputNombre.value;
-    var valDescripcion = inputDescripcion.value;
-    limpiarFormulario();
-    guardarProducto(valId, valNombre, valDescripcion);
-    mostrarAlerta("Se actualizo con exito");
-  };
-}
-
-
 
 cargarDatos();
 

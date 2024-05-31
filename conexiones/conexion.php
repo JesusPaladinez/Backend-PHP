@@ -12,17 +12,16 @@ class Conexion{
         $this ->password=$passwordaux;
         $this ->db=$dbaux;
     }
-    public function Conectar(){
+    public function conectar(){
         try{
             $this->conexion = new PDO("mysql:host={$this->host};dbname={$this->db}", $this->user, $this->password);
             return $this->conexion;
     } catch(PDOException $e) {
         print "¡Error!: " . $e->getMessage();
     }}
-    public function Desconectar(){
+    public function desconectar(){
        try{
             $this->conexion=null;
-           // echo('Desconexion con exito');
         }catch(PDOException $e) {
             print "¡Error al desconectar!: " . $e->getMessage();}}
 }

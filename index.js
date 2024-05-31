@@ -67,12 +67,22 @@ function eliminarProducto(id) {
     });
 }
 
-function traerDatos(id) {
+function traerProducto(id) {
   fetch('controllers/traerProductoController.php?id=' + id)
   .then(response => response.json)
   .then(data => {
     alert(data['codigo']);
   })
+}
+
+function mostrarAlerta(mensaje) {
+  var alerta = document.getElementById("alerMessange");
+  alerta.innerHTML = mensaje;
+  alerta.hidden = false;
+
+  setTimeout(function () {
+    alerta.hidden = true;
+  }, 1000);
 }
 
 cargarDatos();

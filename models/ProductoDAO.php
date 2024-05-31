@@ -40,14 +40,13 @@ class ProductoDAO{
         }
     }
 
-    function agregarProducto($id,$nombre, $descripcion) {
+    function agregarProducto($nombre, $descripcion) {
         $conexion = new Conexion('localhost', 'root', '', 'dbProductosPHP');
         try {
             $conn = $conexion->conectar(); 
-            $agregar = $conn->prepare("INSERT INTO productos (`id`, `nombre`, `descripcion`) VALUES (?, ?, ?)");
-            $agregar->bindParam(1, $id);
-            $agregar->bindParam(2, $nombre);
-            $agregar->bindParam(3, $descripcion);
+            $agregar = $conn->prepare("INSERT INTO productos (`nombre`, `descripcion`) VALUES (?, ?)");
+            $agregar->bindParam(1, $nombre);
+            $agregar->bindParam(2, $descripcion);
             $agregar->execute();
             return "Agregado Exitosamente";
         } catch(PDOException $e) {

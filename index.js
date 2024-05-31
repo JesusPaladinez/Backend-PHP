@@ -25,8 +25,8 @@ function cargarDatos() {
                             ¿Estás seguro que deseas continuar?
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button class="btn btn-danger" data-dismiss="modal" onClick='eliminarProducto(${row.id})'>Eliminar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                           </div>
                         </div>
                       </div>
@@ -57,6 +57,25 @@ function guardarProducto(id, nombre, descripcion) {
     });
 }
 
+function agregarProducto() {
+  const nombre = document.getElementById("nombre").value;
+  const descripcion = document.getElementById("descripcion").value;
+
+  fetch(
+    `./controllers/agregarProductoController.php?nombre=${nombre}&descripcion=${descripcion}`
+  )
+    .then((response) => {
+      return response.text();
+    })
+    .then((data) => {
+      cargarDatos();
+      // mostrarAlerta("Se agrego con exito")
+      console.log(data);
+      document.getElementById("nombre").value = "";
+      document.getElementById("descripcion").value = "";
+    });
+}
+
 function eliminarProducto(id) {
   fetch("./controllers/eliminarProductoController.php?id=" + id)
     .then((response) => response.text())
@@ -68,11 +87,28 @@ function eliminarProducto(id) {
 }
 
 function traerProducto(id) {
-  fetch('controllers/traerProductoController.php?id=' + id)
-  .then(response => response.json)
-  .then(data => {
-    alert(data['codigo']);
-  })
+  fetch(`./controllers/traerProductoController.php?id=${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      var inputId = document.getElementById("id");
+      var inputNombre = document.getElementById("nombre");
+      var inputDescripcion = document.getElementById("descripcion");
+      inputId.value = data["id"];
+      inputNombre.value = data["nombre"];
+      inputDescripcion.value = data["descripcion"];
+    });
+
+  var boton = document.getElementById("Guardar");
+  boton.onclick = function () {
+    var inputId = document.getElementById("id");
+    var inputNombre = document.getElementById("nombre");
+    var inputDescripcion = document.getElementById("descripcion");
+    var valId = inputId.value;
+    var valNombre = inputNombre.value;
+    var valDescripcion = inputDescripcion.value;
+    limpiarFormulario();
+    guardarProducto(valId, valNombre, valDescripcion);
+  };
 }
 
 function mostrarAlerta(mensaje) {
